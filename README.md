@@ -1,3 +1,7 @@
+> ### NOTE
+This is a fork of [VVV](https://github.com/varying-vagrant-vagrants/vvv), the desired development environment for Harvest Web development. This fork adds certain features to cater to our needs. The following has been added:
+- Bower
+
 # Varying Vagrant Vagrants
 
 Varying Vagrant Vagrants is an open source [Vagrant](http://vagrantup.com) configuration focused on [WordPress](http://wordpress.org) development. VVV is [MIT Licensed](https://github.com/varying-vagrant-vagrants/vvv/blob/master/LICENSE).
