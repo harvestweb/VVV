@@ -232,6 +232,18 @@ if [[ $ping_result == "Connected" ]]; then
 		npm install -g grunt-cssjanus &>/dev/null
 	fi
 
+	# Bower
+	#
+	# Install or Update Bower based on current state.  Updates are direct
+	# from NPM
+	if [[ "$(bower --version)" ]]; then
+		echo "Updating Bower"
+		npm update -g bower &>/dev/null
+	else
+		echo "Installing Bower"
+		npm install -g bower &>/dev/null
+	fi
+
 	# Graphviz
 	#
 	# Set up a symlink between the Graphviz path defined in the default Webgrind
