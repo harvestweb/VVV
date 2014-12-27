@@ -99,6 +99,10 @@ apt_package_check_list=(
 	# nodejs for use by grunt
 	g++
 	nodejs
+
+	# ruby and rubygems for sass and compass
+	ruby
+	ruby-dev
 )
 
 echo "Check for apt packages to install..."
@@ -242,6 +246,18 @@ if [[ $ping_result == "Connected" ]]; then
 	else
 		echo "Installing Bower"
 		npm install -g bower &>/dev/null
+	fi
+
+	# Compass
+	#
+	# Install or Update Compass based on current state.  Updates are direct
+	# from ruby gem
+	if [[ "$(compass --version)" ]]; then
+		echo "Updating Compass"
+		gem update compass &>/dev/null
+	else
+		echo "Installing Compass"
+		gem install compass &>/dev/null
 	fi
 
 	# Graphviz
