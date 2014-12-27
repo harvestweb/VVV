@@ -1,6 +1,8 @@
 > ### NOTE
 This is a fork of [VVV](https://github.com/varying-vagrant-vagrants/vvv), the desired development environment for Harvest Web development. This fork adds certain features to cater to our needs. The following has been added:
 - Bower
+- Ruby
+- Sass and Compass
 
 # Varying Vagrant Vagrants
 
