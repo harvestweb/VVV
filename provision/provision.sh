@@ -303,12 +303,37 @@ tools_install() {
     npm install -g grunt-rtlcss &>/dev/null
   fi
 
+  # Bower
+  #
+  # Install or Update Bower based on current state.  Updates are direct
+  # from NPM
+  if [[ "$(bower --version)" ]]; then
+    echo "Updating Bower"
+    npm update -g bower &>/dev/null
+  else
+    echo "Installing Bower"
+    npm install -g bower &>/dev/null
+  fi
+
+  # Compass
+  #
+  # Install or Update Compass based on current state.  Updates are direct
+  # from ruby gem
+  if [[ "$(compass --version)" ]]; then
+    echo "Updating Compass"
+    gem update compass &>/dev/null
+  else
+    echo "Installing Compass"
+    gem install compass &>/dev/null
+  fi
+
 	# Graphviz
 	#
 	# Set up a symlink between the Graphviz path defined in the default Webgrind
 	# config and actual path.
 	echo "Adding graphviz symlink for Webgrind..."
-	ln -sf /usr/bin/dot /usr/local/bin/dot
+  ln -sf "/usr/bin/dot" "/usr/local/bin/dot"
+}
 
 nginx_setup() {
   # Create an SSL key and certificate for HTTPS support.
