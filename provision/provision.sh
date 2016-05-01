@@ -315,6 +315,18 @@ tools_install() {
     npm install -g bower &>/dev/null
   fi
 
+  # Gulp
+  #
+  # Install or Update Gulp based on current state.  Updates are direct
+  # from NPM
+  if [[ "$(gulp --version)" ]]; then
+    echo "Updating Gulp"
+    npm update -g gulp &>/dev/null
+  else
+    echo "Installing Gulp"
+    npm install -g gulp &>/dev/null
+  fi
+
   # Compass
   #
   # Install or Update Compass based on current state.  Updates are direct
@@ -327,29 +339,29 @@ tools_install() {
     gem install compass &>/dev/null
   fi
 
-	# Graphviz
-	#
-	# Set up a symlink between the Graphviz path defined in the default Webgrind
-	# config and actual path.
-	echo "Adding graphviz symlink for Webgrind..."
+  # Graphviz
+  #
+  # Set up a symlink between the Graphviz path defined in the default Webgrind
+  # config and actual path.
+  echo "Adding graphviz symlink for Webgrind..."
   ln -sf "/usr/bin/dot" "/usr/local/bin/dot"
 }
 
 nginx_setup() {
   # Create an SSL key and certificate for HTTPS support.
   if [[ ! -e /etc/nginx/server.key ]]; then
-	  echo "Generate Nginx server private key..."
-	  vvvgenrsa="$(openssl genrsa -out /etc/nginx/server.key 2048 2>&1)"
-	  echo "$vvvgenrsa"
+    echo "Generate Nginx server private key..."
+    vvvgenrsa="$(openssl genrsa -out /etc/nginx/server.key 2048 2>&1)"
+    echo "$vvvgenrsa"
   fi
   if [[ ! -e /etc/nginx/server.crt ]]; then
-	  echo "Sign the certificate using the above private key..."
-	  vvvsigncert="$(openssl req -new -x509 \
+    echo "Sign the certificate using the above private key..."
+    vvvsigncert="$(openssl req -new -x509 \
             -key /etc/nginx/server.key \
             -out /etc/nginx/server.crt \
             -days 3650 \
             -subj /CN=*.wordpress-develop.dev/CN=*.wordpress.dev/CN=*.vvv.dev/CN=*.wordpress-trunk.dev 2>&1)"
-	  echo "$vvvsigncert"
+    echo "$vvvsigncert"
   fi
 
   echo -e "\nSetup configuration files..."
