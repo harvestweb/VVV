@@ -83,10 +83,6 @@ apt_package_check_list=(
   # trouble with in Linux.
   dos2unix
 
-  # nodejs for use by grunt
-  g++
-  nodejs
-
   #Mailcatcher requirement
   libsqlite3-dev
 
@@ -232,6 +228,21 @@ package_install() {
 }
 
 tools_install() {
+  # nodejs
+  #
+  # Install NVM and install npm v4.4.0
+  if ! [[ "$(nvm --version)" ]]; then
+    echo "Installing NVM"
+    # get nvm
+    sudo su vagrant -c "curl https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash"
+    # activate nvm
+    echo "source /home/vagrant/.nvm/nvm.sh" >> /home/vagrant/.profile
+    source /home/vagrant/.profile
+  fi
+  # install node
+  nvm install 4.4.0
+  nvm alias default 4.4.0
+
   # npm
   #
   # Make sure we have the latest npm version and the update checker module
